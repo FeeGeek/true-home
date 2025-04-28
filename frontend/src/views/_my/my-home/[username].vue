@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { fetchGetMyHomePluginInstanceList } from '@/service/api';
-import BaseTable from '@/components/home/baseTable.vue';
+import BaseTable from '@/components/home/base-table.vue';
 import UserInfo from '@/views/_my/my-home/modules/user-info.vue';
 
 interface Props {

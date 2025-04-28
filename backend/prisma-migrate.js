@@ -2,8 +2,7 @@ const { $ } = require('execa');
 const fs = require('fs');
 const path = require('path');
 const dotenv = require('dotenv');
-// dotenv.config({ path: '.env'});
-dotenv.config({ path: '.env.production.local' });
+dotenv.config({ path: '.env' });
 
 // 软件包运行器（包管理器）
 const PACKAGE = 'pnpx';

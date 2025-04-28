@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
 import { fetchGetMyHomeContactInfoList } from '@/service/api';
-import ContactPopup from '@/components/home/ContactPopup.vue';
+import ContactPopup from '@/components/home/contact-popup.vue';
 
 interface Props {
   username: string;

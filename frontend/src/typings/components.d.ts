@@ -9,10 +9,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppProvider: typeof import('./../components/common/app-provider.vue')['default']
-    BaseTable: typeof import('./../components/home/baseTable.vue')['default']
+    BaseTable: typeof import('../components/home/base-table.vue')['default']
     BetterScroll: typeof import('./../components/custom/better-scroll.vue')['default']
     ButtonIcon: typeof import('./../components/custom/button-icon.vue')['default']
-    ContactPopup: typeof import('./../components/home/ContactPopup.vue')['default']
+    ContactPopup: typeof import('../components/home/contact-popup.vue')['default']
     CountTo: typeof import('./../components/custom/count-to.vue')['default']
     DarkModeContainer: typeof import('./../components/common/dark-mode-container.vue')['default']
     ExceptionBase: typeof import('./../components/common/exception-base.vue')['default']
