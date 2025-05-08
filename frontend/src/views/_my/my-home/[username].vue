@@ -14,7 +14,7 @@ const plugins = ref<Plugin.BasePlugin[]>([]);
 const getMyHomePluginInstanceList = async (username: string) => {
   const res = await fetchGetMyHomePluginInstanceList({ username });
   if (res.error) return;
-  plugins.value = res.data.records;
+  plugins.value = res.data;
 };
 getMyHomePluginInstanceList(props.username);
 </script>

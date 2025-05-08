@@ -3,32 +3,40 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   Post,
+  Put,
   Query,
   Request,
 } from '@nestjs/common';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { MyHomeContactInfoQueryDto } from '@app/base-system/api/my-home/dto/my_home_contact_info.dto';
-// import { AccessKeyCreateCommand } from '@app/base-system/lib/bounded-contexts/access-key/commands/access_key-create.command';
-// import { AccessKeyDeleteCommand } from '@app/base-system/lib/bounded-contexts/access-key/commands/access_key-delete.command';
+import { MyHomeContactInfoCreateCommand } from '@app/base-system/lib/bounded-contexts/my-home/application/commands/my-home-contact-info-create.command';
+import { MyHomeContactInfoDeleteCommand } from '@app/base-system/lib/bounded-contexts/my-home/application/commands/my-home-contact-info-delete.command';
+import { MyHomeContactInfoUpdateCommand } from '@app/base-system/lib/bounded-contexts/my-home/application/commands/my-home-contact-info-update.command';
+import {
+  MyHomeContactInfoByIdQuery,
+  MyHomeContactInfoByUserIdQuery,
+  MyHomeContactInfoByUsernameQuery,
+} from '@app/base-system/lib/bounded-contexts/my-home/application/queries/my-home-contact-info.query';
+import { UserInfoByUsernameQuery } from '@app/base-system/lib/bounded-contexts/my-home/application/queries/user-info-by-username.query';
 
 import { Public } from '@lib/infra/decorators/public.decorator';
 import { ApiRes } from '@lib/infra/rest/res.response';
-// import { BUILT_IN } from '@lib/shared/prisma/db.constant';
-import { PaginationResult } from '@lib/shared/prisma/pagination';
-import { PrismaService } from '@lib/shared/prisma/prisma.service';
 
-// import { MyHomeContactInfoCreateDto } from '../dto/my_home.dto';
+import {
+  MyHomeContactInfoQueryDto,
+  MyHomeContactInfoCreateDto,
+  MyHomeContactInfoUpdateDto,
+  MyHomeContactInfoDeleteDto,
+} from '../dto/my_home_contact_info.dto';
 
 @ApiTags('MyHome - Module')
 @Controller('my-home')
 export class MyHomeContactInfoController {
   constructor(
     private readonly commandBus: CommandBus,
-    private readonly prisma: PrismaService,
+    private readonly queryBus: QueryBus,
   ) {}
 
   @Get('contact-info')
@@ -39,96 +47,133 @@ export class MyHomeContactInfoController {
   async getMyHomeContactInfo(
     @Query() queryDto: MyHomeContactInfoQueryDto,
   ): Promise<ApiRes<any>> {
-    let result;
-    let userData;
     if (queryDto.id) {
-      result = await this.prisma.myHomeContactInfo.findMany({
-        where: {
-          id: queryDto.id,
-          status: 'ENABLED',
-        },
-      });
-      if (result.length === 0) {
-        return ApiRes.error(400, 'Invalid query');
+      const result = await this.queryBus.execute(
+        new MyHomeContactInfoByIdQuery(queryDto.id),
+      );
+      if (result) {
+        return ApiRes.success(result);
+      } else {
+        return ApiRes.error(404, 'Contact info not found');
       }
-      userData = await this.prisma.sysUser.findFirst({
-        select: { id: true, username: true, nickName: true, avatar: true },
-        where: {
-          id: result[0].userId,
-          status: 'ENABLED',
-        },
-      });
     } else if (queryDto.userId) {
-      userData = await this.prisma.sysUser.findFirst({
-        select: { id: true, username: true, nickName: true, avatar: true },
-        where: {
-          id: queryDto.userId,
-          status: 'ENABLED',
-        },
-      });
-      if (!userData) {
-        return ApiRes.error(400, 'Invalid query');
+      const result = await this.queryBus.execute(
+        new MyHomeContactInfoByUserIdQuery(queryDto.userId),
+      );
+      if (result) {
+        return ApiRes.success(result);
+      } else {
+        return ApiRes.error(404, 'Contact info not found');
       }
-      result = await this.prisma.myHomeContactInfo.findMany({
-        where: {
-          userId: queryDto.userId,
-          status: 'ENABLED',
-        },
-      });
     } else if (queryDto.username) {
-      userData = await this.prisma.sysUser.findFirst({
-        select: { id: true, username: true, nickName: true, avatar: true },
-        where: {
-          username: queryDto.username,
-          status: 'ENABLED',
-        },
-      });
-      if (!userData) {
-        return ApiRes.error(400, 'Invalid query');
+      const result = await this.queryBus.execute(
+        new MyHomeContactInfoByUsernameQuery(queryDto.username),
+      );
+      if (result) {
+        return ApiRes.success(result);
+      } else {
+        return ApiRes.error(404, 'Contact info not found');
       }
-      result = await this.prisma.myHomeContactInfo.findMany({
-        where: {
-          userId: userData.id,
-          status: 'ENABLED',
-        },
-      });
-    } else {
-      return ApiRes.error(400, 'Invalid query');
     }
-
-    return ApiRes.success({ ...userData, records: result });
+    return ApiRes.error(400, 'Invalid query');
   }
-  //
-  // @Post()
-  // @ApiOperation({ summary: 'Create a New AccessKey' })
-  // @ApiResponse({
-  //   status: 201,
-  //   description: 'The accessKey has been successfully created.',
-  // })
-  // @ApiResponse({ status: 403, description: 'Forbidden.' })
-  // async createAccessKey(
-  //   @Body() dto: MyHomeContactInfoCreateDto,
-  //   @Request() req: any,
-  // ): Promise<ApiRes<null>> {
-  //   await this.commandBus.execute(
-  //     new AccessKeyCreateCommand(
-  //       req.user.domain === BUILT_IN ? dto.domain : req.user.domain,
-  //       dto.description,
-  //       req.user.uid,
-  //     ),
-  //   );
-  //   return ApiRes.ok();
-  // }
-  //
-  // @Delete(':id')
-  // @ApiOperation({ summary: 'Delete a AccessKey' })
-  // @ApiResponse({
-  //   status: 201,
-  //   description: 'The accessKey has been successfully deleted.',
-  // })
-  // @ApiResponse({ status: 403, description: 'Forbidden.' })
-  // async deleteAccessKey(@Param('id') id: string): Promise<ApiRes<null>> {
-  //   await this.commandBus.execute(new AccessKeyDeleteCommand(id));
-  //   return ApiRes.ok();
-  // }
+
+  @Post('contact-info')
+  @ApiOperation({ summary: 'Create a New MyHomeContactInfo' })
+  @ApiResponse({
+    status: 201,
+    description: 'The MyHomeContactInfo has been successfully created.',
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  async createMyHomeContactInfo(
+    @Body() dto: MyHomeContactInfoCreateDto,
+    @Request() req: any,
+  ): Promise<ApiRes<null>> {
+    try {
+      await this.commandBus.execute(
+        new MyHomeContactInfoCreateCommand(
+          req.user.uid,
+          dto.userId,
+          dto.icon,
+          dto.contactName,
+          dto.contact,
+          dto.showContactName,
+          dto.link,
+          dto.linkType,
+          dto.status,
+        ),
+      );
+      return ApiRes.ok();
+    } catch (e) {
+      return ApiRes.error(400, e.message);
+    }
+  }
+
+  @Put('contact-info')
+  @ApiOperation({ summary: 'Update MyHomeContactInfo' })
+  @ApiResponse({
+    status: 201,
+    description: 'The MyHomeContactInfo has been successfully updated.',
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  async updateMyHomeContactInfo(
+    @Body() dto: MyHomeContactInfoUpdateDto,
+    @Request() req: any,
+  ) {
+    try {
+      await this.commandBus.execute(
+        new MyHomeContactInfoUpdateCommand(
+          req.user.uid,
+          dto.id,
+          dto.userId,
+          dto.icon,
+          dto.contactName,
+          dto.contact,
+          dto.showContactName,
+          dto.link,
+          dto.linkType,
+          dto.status,
+        ),
+      );
+      return ApiRes.ok();
+    } catch (e) {
+      return ApiRes.error(400, e.message);
+    }
+  }
+
+  @Delete('contact-info')
+  @ApiOperation({ summary: 'Delete a MyHomeContactInfo' })
+  @ApiResponse({
+    status: 201,
+    description: 'The MyHomeContactInfo has been successfully deleted.',
+  })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  async deleteMyHomeContactInfo(
+    @Body() dto: MyHomeContactInfoDeleteDto,
+  ): Promise<ApiRes<null>> {
+    try {
+      await this.commandBus.execute(new MyHomeContactInfoDeleteCommand(dto.id));
+      return ApiRes.ok();
+    } catch (e) {
+      return ApiRes.error(400, e);
+    }
+  }
+
+  // 获取用户信息
+  @Get('user-info')
+  @Public()
+  @ApiOperation({ summary: 'Get User Info by Username' })
+  async getUserInfoByUsername(
+    @Query() queryDto: { username: string },
+  ): Promise<ApiRes<any>> {
+    const userInfo = await this.queryBus.execute(
+      new UserInfoByUsernameQuery(queryDto.username),
+    );
+    console.log(userInfo, 'userInfo', queryDto);
+    if (userInfo) {
+      return ApiRes.success(userInfo);
+    } else {
+      return ApiRes.error(404, 'User not found');
+    }
+  }
 }

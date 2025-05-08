@@ -1,5 +1,14 @@
 import { request } from '../request';
 
+/** get my-home-user-info */
+export function fetchGetMyHomeUserInfo(params: MyHome.UserInfoParams) {
+  return request<MyHome.UserInfoResponse>({
+    url: '/my-home/user-info',
+    method: 'get',
+    params
+  });
+}
+
 /** get my-home-contact-info list */
 export function fetchGetMyHomeContactInfoList(params: MyHome.ContactInfoListParams) {
   return request<MyHome.ContactInfoList>({

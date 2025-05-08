@@ -9,6 +9,7 @@ import { RoleInfraModule } from '@app/base-system/infra/bounded-contexts/iam/rol
 import { TokensInfraModule } from '@app/base-system/infra/bounded-contexts/iam/tokens/tokens.infra.module';
 import { LoginLogInfraModule } from '@app/base-system/infra/bounded-contexts/log-audit/login-log/login-log.infra.module';
 import { OperationLogInfraModule } from '@app/base-system/infra/bounded-contexts/log-audit/operation-log/operation-log.infra.module';
+import { MyHomeInfraModule } from '@app/base-system/infra/bounded-contexts/my-home/my_home.infra.module';
 
 import { Controllers as AccessKeyRest } from './access-key/rest';
 import { Controllers as EndpointRest } from './endpoint/rest';
@@ -28,6 +29,7 @@ import { Controllers as MyHomeRest } from './my-home/rest';
     LoginLogInfraModule,
     TokensInfraModule,
     AccessKeyInfraModule,
+    MyHomeInfraModule,
   ],
   controllers: [
     ...IamRest,

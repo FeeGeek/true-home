@@ -61,9 +61,8 @@ export class MyHomePluginController {
         });
       }
       console.log(result, 'result');
-      return ApiRes.success({ records: result });
-    } else {
-      return ApiRes.error(400, 'Invalid query');
+      return ApiRes.success(result);
     }
+    return ApiRes.error(400, 'Invalid query');
   }
 }

@@ -282,7 +282,7 @@ model MyHomePluginInstance {
 model MyHomeContactInfo {
   id              String  @id @default(cuid())
   userId          String  @map("user_id")
-  icon            String? @default("")
+  icon            String  @default("")
   contactName     String  @map("contact_name")
   contact         String
   showContactName Boolean @default(false) @map("show_contact_name")

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
-import { fetchGetMyHomeContactInfoList } from '@/service/api';
+import { fetchGetMyHomeContactInfoList, fetchGetMyHomeUserInfo } from '@/service/api';
 import ContactPopup from '@/components/home/contact-popup.vue';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const userInfo = ref<MyHome.ContactInfo>({
+const userInfo = ref<MyHome.UserInfo>({
   id: '',
   username: '',
   nickName: '',
@@ -19,17 +19,39 @@ const userInfo = ref<MyHome.ContactInfo>({
 
 const contacts = ref<MyHome.Contact[]>([]);
 
-const getMyHomeContactInfoList = async (username: string) => {
+const getUserInfo = async (username: string) => {
   try {
-    const res = await fetchGetMyHomeContactInfoList({ username });
-    if (res.error) return;
-    userInfo.value = res.data;
-    contacts.value = res.data?.records;
+    const res = await fetchGetMyHomeUserInfo({ username });
+    if (res.error) return null;
+    return res.data;
   } catch (e) {
-    console.log(e);
+    console.error(e);
+    return null;
   }
 };
-getMyHomeContactInfoList(props.username);
+
+const getMyHomeContactInfoList = async (userId: string) => {
+  try {
+    const res = await fetchGetMyHomeContactInfoList({ userId });
+    if (res.error) return [];
+    return res.data ?? [];
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+};
+
+(async () => {
+  try {
+    const userInfoResult = await getUserInfo(props.username);
+    if (userInfoResult) {
+      userInfo.value = userInfoResult;
+      contacts.value = await getMyHomeContactInfoList(userInfoResult.id);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+})();
 
 const currentId = ref('');
 
@@ -71,10 +93,9 @@ const closePopup = () => {
 };
 
 const handleIconClick = (contact: MyHome.Contact) => {
+  setCurrentId(contact.id);
   if (contact.linkType === 'img' || contact.linkType === 'text') {
     openPopup(contact);
-  } else {
-    setCurrentId(contact.id);
   }
 };
 </script>

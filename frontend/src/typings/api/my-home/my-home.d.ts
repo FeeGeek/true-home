@@ -1,4 +1,16 @@
 declare namespace MyHome {
+  type UserInfoParams = {
+    username: string;
+  };
+
+  type UserInfo = {
+    id: string;
+    username: string;
+    nickName: string;
+    avatar: string;
+  };
+  type UserInfoResponse = Api.Common.CommonRecord<UserInfo>;
+
   type ContactInfoListParams = {
     id?: string | null;
     userId?: string | null;
@@ -15,26 +27,12 @@ declare namespace MyHome {
     link: string;
     linkType: string;
   };
-  type ContactInfo = {
-    id: string;
-    username: string;
-    nickName: string;
-    avatar: string;
-  };
-  type ContactInfoList = Api.Common.CommonRecord<ContactInfo & { records: Contact[] }>;
+  type ContactInfoList = Api.Common.CommonRecord<Contact[]>;
 
   type PluginInstanceListParams = {
     userId?: string;
     username?: string | null;
     status?: Api.Common.EnableStatus | null;
   };
-  // type PluginInstance<T = any> = {
-  //   id: string;
-  //   name: string;
-  //   version: string;
-  //   componentName: string;
-  //   userId: string;
-  //   meta: Plugin.BasePlugin<T>;
-  // };
-  type PluginInstanceList = Api.Common.CommonRecord<{ records: Plugin.BasePlugin[] }>;
+  type PluginInstanceList = Api.Common.CommonRecord<Plugin.BasePlugin[]>;
 }

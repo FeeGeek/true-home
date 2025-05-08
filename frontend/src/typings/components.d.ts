@@ -9,10 +9,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppProvider: typeof import('./../components/common/app-provider.vue')['default']
-    BaseTable: typeof import('../components/home/base-table.vue')['default']
+    BaseTable: typeof import('./../components/home/base-table.vue')['default']
     BetterScroll: typeof import('./../components/custom/better-scroll.vue')['default']
     ButtonIcon: typeof import('./../components/custom/button-icon.vue')['default']
-    ContactPopup: typeof import('../components/home/contact-popup.vue')['default']
+    ContactPopup: typeof import('./../components/home/contact-popup.vue')['default']
     CountTo: typeof import('./../components/custom/count-to.vue')['default']
     DarkModeContainer: typeof import('./../components/common/dark-mode-container.vue')['default']
     ExceptionBase: typeof import('./../components/common/exception-base.vue')['default']
@@ -38,7 +38,9 @@ declare module 'vue' {
     IconMdiRefresh: typeof import('~icons/mdi/refresh')['default']
     IconUilSearch: typeof import('~icons/uil/search')['default']
     LangSwitch: typeof import('./../components/common/lang-switch.vue')['default']
+    LetterRain: typeof import('./../components/special/letter-rain.vue')['default']
     LookForward: typeof import('./../components/custom/look-forward.vue')['default']
+    LoveLetterRain: typeof import('./../components/special/love-letter-rain.vue')['default']
     MenuToggler: typeof import('./../components/common/menu-toggler.vue')['default']
     NAlert: typeof import('naive-ui')['NAlert']
     NBreadcrumb: typeof import('naive-ui')['NBreadcrumb']
