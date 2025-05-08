@@ -11,6 +11,7 @@ export class MyHomeContactInfoUpdateCommand {
     public readonly showContactName?: boolean,
     public readonly link?: string,
     public readonly linkType?: string,
+    public readonly order?: number,
     public readonly status?: Status,
   ) {}
 }

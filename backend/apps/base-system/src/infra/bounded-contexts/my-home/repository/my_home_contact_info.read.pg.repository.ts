@@ -27,43 +27,49 @@ export class MyHomeContactInfoReadPostgresRepository
   }
 
   async findContactInfoById(id: string): Promise<MyHomeContactInfo[]> {
-    return this.prisma.myHomeContactInfo.findMany({
-      select: {
-        id: true,
-        userId: true,
-        icon: true,
-        contactName: true,
-        contact: true,
-        showContactName: true,
-        link: true,
-        linkType: true,
-        status: true,
-      },
-      where: {
-        id,
-        status: 'ENABLED',
-      },
-    });
+    return this.prisma.myHomeContactInfo
+      .findMany({
+        select: {
+          id: true,
+          userId: true,
+          icon: true,
+          contactName: true,
+          contact: true,
+          showContactName: true,
+          link: true,
+          linkType: true,
+          order: true,
+          status: true,
+        },
+        where: {
+          id,
+          status: 'ENABLED',
+        },
+      })
+      .then((r) => r.sort((a, b) => a.order - b.order));
   }
 
   async findContactInfoByUserId(userId: string): Promise<MyHomeContactInfo[]> {
-    return this.prisma.myHomeContactInfo.findMany({
-      select: {
-        id: true,
-        userId: true,
-        icon: true,
-        contactName: true,
-        contact: true,
-        showContactName: true,
-        link: true,
-        linkType: true,
-        status: true,
-      },
-      where: {
-        userId,
-        status: 'ENABLED',
-      },
-    });
+    return this.prisma.myHomeContactInfo
+      .findMany({
+        select: {
+          id: true,
+          userId: true,
+          icon: true,
+          contactName: true,
+          contact: true,
+          showContactName: true,
+          link: true,
+          linkType: true,
+          order: true,
+          status: true,
+        },
+        where: {
+          userId,
+          status: 'ENABLED',
+        },
+      })
+      .then((r) => r.sort((a, b) => a.order - b.order));
   }
 
   async findContactInfoByUsername(
@@ -77,22 +83,25 @@ export class MyHomeContactInfoReadPostgresRepository
       },
     });
     if (!user) return [];
-    return this.prisma.myHomeContactInfo.findMany({
-      select: {
-        id: true,
-        userId: true,
-        icon: true,
-        contactName: true,
-        contact: true,
-        showContactName: true,
-        link: true,
-        linkType: true,
-        status: true,
-      },
-      where: {
-        userId: user.id,
-        status: 'ENABLED',
-      },
-    });
+    return this.prisma.myHomeContactInfo
+      .findMany({
+        select: {
+          id: true,
+          userId: true,
+          icon: true,
+          contactName: true,
+          contact: true,
+          showContactName: true,
+          link: true,
+          linkType: true,
+          order: true,
+          status: true,
+        },
+        where: {
+          userId: user.id,
+          status: 'ENABLED',
+        },
+      })
+      .then((r) => r.sort((a, b) => a.order - b.order));
   }
 }

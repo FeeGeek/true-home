@@ -267,7 +267,7 @@ model MyHomePluginInstance {
   pluginId String @map("plugin_id")
   userId   String @map("user_id")
   meta     Json?
-  order    Int    @map("sequence")
+  order    Int    @default(0) @map("sequence")
   status   Status
 
   createdAt DateTime  @default(now()) @map("created_at")
@@ -288,6 +288,7 @@ model MyHomeContactInfo {
   showContactName Boolean @default(false) @map("show_contact_name")
   link            String
   linkType        String  @map("link_type")
+  order           Int     @default(0) @map("sequence")
   status          Status
 
   createdAt DateTime  @default(now()) @map("created_at")

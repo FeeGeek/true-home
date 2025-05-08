@@ -26,6 +26,7 @@ declare namespace MyHome {
     showContactName: boolean;
     link: string;
     linkType: string;
+    order: number;
   };
   type ContactInfoList = Api.Common.CommonRecord<Contact[]>;
 

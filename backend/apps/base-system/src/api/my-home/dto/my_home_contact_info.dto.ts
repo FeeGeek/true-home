@@ -4,6 +4,7 @@ import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsEnum,
+  IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -72,6 +73,11 @@ export class MyHomeContactInfoCreateDto {
   @IsNotEmpty({ message: 'linkType cannot be empty.' })
   linkType: string;
 
+  @ApiProperty({ required: false })
+  @IsInt({ message: 'order must be an integer' })
+  @IsNotEmpty({ message: 'order cannot be empty.' })
+  order: number;
+
   @ApiProperty({ required: true })
   @IsEnum(Status, { message: 'Status must be a valid enum value' })
   status: Status;
@@ -117,6 +123,12 @@ export class MyHomeContactInfoUpdateDto {
   @IsOptional()
   @IsString({ message: 'linkType must be a string' })
   linkType: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt({ message: 'order must be an integer' })
+  @IsNotEmpty({ message: 'order cannot be empty.' })
+  order: number;
 
   @ApiProperty({ required: false })
   @IsOptional()

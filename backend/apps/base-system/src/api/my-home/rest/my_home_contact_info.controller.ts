@@ -100,6 +100,7 @@ export class MyHomeContactInfoController {
           dto.showContactName,
           dto.link,
           dto.linkType,
+          dto.order,
           dto.status,
         ),
       );
@@ -132,6 +133,7 @@ export class MyHomeContactInfoController {
           dto.showContactName,
           dto.link,
           dto.linkType,
+          dto.order,
           dto.status,
         ),
       );

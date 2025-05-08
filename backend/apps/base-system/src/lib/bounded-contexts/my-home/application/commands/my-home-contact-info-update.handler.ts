@@ -43,6 +43,7 @@ export class MyHomeContactInfoUpdateHandler
         command.showContactName ?? existingContactInfo.showContactName,
       link: command.link ?? existingContactInfo.link,
       linkType: command.linkType ?? existingContactInfo.linkType,
+      order: command.order ?? existingContactInfo.order,
       status: 'ENABLED',
       updatedBy: command.uid,
       updatedAt: new Date(),
