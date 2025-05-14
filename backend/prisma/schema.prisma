@@ -246,40 +246,7 @@ model SysAccessKey {
   @@map("sys_access_key")
 }
 
-model MyHomePlugin {
-  id            String @id @default(cuid())
-  name          String
-  version       String
-  componentName String @map("component_name")
-  status        Status
-
-  createdAt DateTime  @default(now()) @map("created_at")
-  createdBy String    @map("created_by")
-  updatedAt DateTime? @updatedAt @map("updated_at")
-  updatedBy String?   @map("updated_by")
-
-  @@index([name, version])
-  @@map("my_plugin")
-}
-
-model MyHomePluginInstance {
-  id       String @id @default(cuid())
-  pluginId String @map("plugin_id")
-  userId   String @map("user_id")
-  meta     Json?
-  order    Int    @default(0) @map("sequence")
-  status   Status
-
-  createdAt DateTime  @default(now()) @map("created_at")
-  createdBy String    @map("created_by")
-  updatedAt DateTime? @updatedAt @map("updated_at")
-  updatedBy String?   @map("updated_by")
-
-  @@index([userId])
-  @@map("my_plugin_instance")
-}
-
-model MyHomeContactInfo {
+model MyContactInfo {
   id              String  @id @default(cuid())
   userId          String  @map("user_id")
   icon            String  @default("")
@@ -298,4 +265,37 @@ model MyHomeContactInfo {
 
   @@index([userId])
   @@map("my_contact_info")
+}
+
+model MyHomePlugin {
+  id            String @id @default(cuid())
+  name          String
+  version       String
+  componentName String @map("component_name")
+  status        Status
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  createdBy String    @map("created_by")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  updatedBy String?   @map("updated_by")
+
+  @@index([name, version])
+  @@map("my_home_plugin")
+}
+
+model MyHomePluginInstance {
+  id       String @id @default(cuid())
+  pluginId String @map("plugin_id")
+  userId   String @map("user_id")
+  meta     Json?
+  order    Int    @default(0) @map("sequence")
+  status   Status
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  createdBy String    @map("created_by")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  updatedBy String?   @map("updated_by")
+
+  @@index([userId])
+  @@map("my_home_plugin_instance")
 }

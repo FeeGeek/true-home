@@ -18,7 +18,6 @@ export class MyHomeContactInfo {
     public readonly showContactName: boolean,
     public readonly link: string,
     public readonly linkType: string,
-    public readonly order: number,
     public readonly status: Status,
   ) {}
 }
@@ -39,7 +38,6 @@ export class MyHomeContactInfoWrite
   showContactName: boolean;
   link: string;
   linkType: string;
-  order: number;
   status: Status;
   createdAt: Date;
   createdBy: string;

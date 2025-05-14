@@ -69,6 +69,16 @@ export const initSysRoleMenu = async () => {
       menuId: 72,
       domain: 'built-in',
     },
+    {
+      roleId: '1',
+      menuId: 1001,
+      domain: 'built-in',
+    },
+    {
+      roleId: '1',
+      menuId: 1002,
+      domain: 'built-in',
+    },
   ];
 
   return prisma.sysRoleMenu.createMany({ data });

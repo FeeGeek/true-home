@@ -1,25 +1,22 @@
 import { Module } from '@nestjs/common';
 
-import { MyHomeContactInfoReadPostgresRepository } from '@app/base-system/infra/bounded-contexts/my-home/repository/my_home_contact_info.read.pg.repository';
-import { MyHomeContactInfoWritePostgresRepository } from '@app/base-system/infra/bounded-contexts/my-home/repository/my_home_contact_info.write.pg.repository';
-import { UserInfoPostgresRepository } from '@app/base-system/infra/bounded-contexts/my-home/repository/user_info.read.pg.repository';
+import { MyHomePluginReadPgRepository } from '@app/base-system/infra/bounded-contexts/my-home/repository/my_home_plugin.read.pg.repository';
+import { MyHomePluginInstanceReadPgRepository } from '@app/base-system/infra/bounded-contexts/my-home/repository/my_home_plugin_instance.read.pg.repository';
 import {
-  MyHomeContactInfoReadRepoPortToken,
-  MyHomeContactInfoWriteRepoPortToken,
-  UserInfoRepoPortToken,
+  MyHomePluginInstanceReadRepoPortToken,
+  MyHomePluginReadRepoPortToken,
 } from '@app/base-system/lib/bounded-contexts/my-home/constants';
 import { MyHomeModule } from '@app/base-system/lib/bounded-contexts/my-home/my_home.module';
 
 const providers = [
   {
-    provide: MyHomeContactInfoReadRepoPortToken,
-    useClass: MyHomeContactInfoReadPostgresRepository,
+    provide: MyHomePluginReadRepoPortToken,
+    useClass: MyHomePluginReadPgRepository,
   },
   {
-    provide: MyHomeContactInfoWriteRepoPortToken,
-    useClass: MyHomeContactInfoWritePostgresRepository,
+    provide: MyHomePluginInstanceReadRepoPortToken,
+    useClass: MyHomePluginInstanceReadPgRepository,
   },
-  { provide: UserInfoRepoPortToken, useClass: UserInfoPostgresRepository },
 ];
 
 @Module({

@@ -26,7 +26,6 @@ export class MyHomeContactInfoCreateHandler
         showContactName: command.showContactName,
         link: command.link,
         linkType: command.linkType,
-        order: command.order,
         status: 'ENABLED',
         createdBy: command.uid,
         createdAt: new Date(),

@@ -185,7 +185,11 @@ const local: App.I18n.Schema = {
     log: 'Log',
     log_login: 'Login Log',
     log_operation: 'Operation Log',
-    'my-home': 'My Home'
+    my: 'Manage My Page',
+    my_home: 'My Home',
+    public: 'Public',
+    public_my: 'Public My',
+    public_my_home: 'My Home'
   },
   page: {
     login: {

@@ -20,7 +20,6 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   500: () => import("@/views/_builtin/500/index.vue"),
   "iframe-page": () => import("@/views/_builtin/iframe-page/[url].vue"),
   login: () => import("@/views/_builtin/login/index.vue"),
-  "my-home": () => import("@/views/_my/my-home/[username].vue"),
   "access-key": () => import("@/views/access-key/index.vue"),
   home: () => import("@/views/home/index.vue"),
   log_login: () => import("@/views/log/login/index.vue"),
@@ -29,4 +28,6 @@ export const views: Record<LastLevelRouteKey, RouteComponent | (() => Promise<Ro
   manage_role: () => import("@/views/manage/role/index.vue"),
   "manage_user-detail": () => import("@/views/manage/user-detail/[id].vue"),
   manage_user: () => import("@/views/manage/user/index.vue"),
+  my_home: () => import("@/views/my/home/index.vue"),
+  public_my_home: () => import("@/views/public/my/home/[username].vue"),
 };

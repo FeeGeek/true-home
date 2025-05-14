@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { defineEmits, defineProps } from 'vue';
 import { Icon } from '@iconify/vue';
 
 const props = defineProps<{
-  contact: MyHome.Contact;
+  contact: My.Contact;
   isOpen: boolean;
 }>();
 

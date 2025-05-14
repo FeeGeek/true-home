@@ -1,13 +1,11 @@
 import {
-  MyHomeContactInfoByIdQueryHandler,
-  MyHomeContactInfoByUserIdQueryHandler,
-  MyHomeContactInfoByUsernameQueryHandler,
-} from './my-home-contact-info.handler';
-import { UserInfoByUsernameQueryHandler } from './user-info-by-username.handler';
+  MyHomePluginInstanceByUserIdQueryHandler,
+  MyHomePluginInstanceByUsernameQueryHandler,
+} from './my-home-plugin-instance.handler';
+import { MyHomePluginByIdQueryHandler } from './my-home-plugin.handler';
 
 export const QueryHandlers = [
-  MyHomeContactInfoByIdQueryHandler,
-  MyHomeContactInfoByUserIdQueryHandler,
-  MyHomeContactInfoByUsernameQueryHandler,
-  UserInfoByUsernameQueryHandler,
+  MyHomePluginByIdQueryHandler,
+  MyHomePluginInstanceByUserIdQueryHandler,
+  MyHomePluginInstanceByUsernameQueryHandler,
 ];

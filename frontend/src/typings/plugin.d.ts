@@ -14,6 +14,8 @@ declare namespace Plugin {
     name: string;
     version: string;
     componentName: string;
+    pluginId: string;
+    order: number;
     meta: T;
   }
 

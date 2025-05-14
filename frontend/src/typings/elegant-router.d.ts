@@ -32,7 +32,11 @@ declare module "@elegant-router/types" {
     "manage_role": "/manage/role";
     "manage_user": "/manage/user";
     "manage_user-detail": "/manage/user-detail/:id";
-    "my-home": "/my-home/:username";
+    "my": "/my";
+    "my_home": "/my/home";
+    "public": "/public";
+    "public_my": "/public/my";
+    "public_my_home": "/public/my/home/:username";
   };
 
   /**
@@ -73,7 +77,8 @@ declare module "@elegant-router/types" {
     | "log"
     | "login"
     | "manage"
-    | "my-home"
+    | "my"
+    | "public"
   >;
 
   /**
@@ -95,7 +100,6 @@ declare module "@elegant-router/types" {
     | "500"
     | "iframe-page"
     | "login"
-    | "my-home"
     | "access-key"
     | "home"
     | "log_login"
@@ -104,6 +108,8 @@ declare module "@elegant-router/types" {
     | "manage_role"
     | "manage_user-detail"
     | "manage_user"
+    | "my_home"
+    | "public_my_home"
   >;
 
   /**

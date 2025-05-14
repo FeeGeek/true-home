@@ -15,7 +15,6 @@ export const initSysUser = async () => {
       phoneNumber: '18511111111',
       nickName: 'FeeGeek',
       status: 'ENABLED',
-      createdAt: new Date('2000-01-01T00:00:00.000Z'),
       createdBy: '-1',
       updatedAt: null,
       updatedBy: null,

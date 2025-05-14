@@ -100,23 +100,18 @@ async function main() {
 
   try {
     switch (command) {
-      // 初始化迁移
       case 'init_migration':
         await initMigration();
         break;
-      // 生成迁移文件
       case 'generate_migration':
         await generateMigration();
         break;
-      // 部署迁移
       case 'deploy_migration':
         await deployMigration();
         break;
-      // 标记迁移已应用
       case 'resolve_migration':
         await resolveMigration();
         break;
-      // 重置数据库
       case 'reset_database':
         await resetDatabase();
         break;

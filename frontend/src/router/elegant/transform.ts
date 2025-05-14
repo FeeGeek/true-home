@@ -178,7 +178,11 @@ const routeMap: RouteMap = {
   "manage_role": "/manage/role",
   "manage_user": "/manage/user",
   "manage_user-detail": "/manage/user-detail/:id",
-  "my-home": "/my-home/:username"
+  "my": "/my",
+  "my_home": "/my/home",
+  "public": "/public",
+  "public_my": "/public/my",
+  "public_my_home": "/public/my/home/:username"
 };
 
 /**

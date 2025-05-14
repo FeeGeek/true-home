@@ -1,9 +1,5 @@
-export const MyHomeContactInfoWriteRepoPortToken = Symbol(
-  'MyHomeContactInfoWriteRepoPort',
-);
+export const MyHomePluginReadRepoPortToken = Symbol('MyHomePluginReadRepoPort');
 
-export const MyHomeContactInfoReadRepoPortToken = Symbol(
-  'MyHomeContactInfoReadRepoPort',
+export const MyHomePluginInstanceReadRepoPortToken = Symbol(
+  'MyHomePluginInstanceReadRepoPort',
 );
-
-export const UserInfoRepoPortToken = Symbol('UserInfoRepoPort');

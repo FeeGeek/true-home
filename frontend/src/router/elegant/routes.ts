@@ -161,13 +161,53 @@ export const generatedRoutes: GeneratedRoute[] = [
     ]
   },
   {
-    name: 'my-home',
-    path: '/my-home/:username',
-    component: 'layout.base$view.my-home',
-    props: true,
+    name: 'my',
+    path: '/my',
+    component: 'layout.base',
     meta: {
-      title: 'my-home',
-      i18nKey: 'route.my-home'
-    }
+      title: 'my',
+      i18nKey: 'route.my'
+    },
+    children: [
+      {
+        name: 'my_home',
+        path: '/my/home',
+        component: 'view.my_home',
+        meta: {
+          title: 'my_home',
+          i18nKey: 'route.my_home'
+        }
+      }
+    ]
+  },
+  {
+    name: 'public',
+    path: '/public',
+    component: 'layout.base',
+    meta: {
+      title: 'public',
+      i18nKey: 'route.public'
+    },
+    children: [
+      {
+        name: 'public_my',
+        path: '/public/my',
+        meta: {
+          title: 'public_my',
+          i18nKey: 'route.public_my'
+        },
+        children: [
+          {
+            name: 'public_my_home',
+            path: '/public/my/home/:username',
+            component: 'view.public_my_home',
+            meta: {
+              title: 'public_my_home',
+              i18nKey: 'route.public_my_home'
+            }
+          }
+        ]
+      }
+    ]
   }
 ];

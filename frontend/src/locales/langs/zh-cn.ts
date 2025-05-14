@@ -185,7 +185,11 @@ const local: App.I18n.Schema = {
     log: '日志',
     log_login: '登录日志',
     log_operation: '操作日志',
-    'my-home': '我的主页'
+    my: '我的页面管理',
+    my_home: '我的主页',
+    public: '公共',
+    public_my: '公共 - 我的',
+    public_my_home: '我的主页'
   },
   page: {
     login: {

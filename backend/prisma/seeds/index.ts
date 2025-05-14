@@ -1,7 +1,7 @@
 import { prisma } from './helper';
-import { initMyHomeContactInfo } from './myHome/myHomeContactInfo';
-import { initMyHomePlugin } from './myHome/myHomePlugin';
-import { initMyHomePluginInstance } from './myHome/myHomePluginInstance';
+import { initMyContactInfo } from './my/myContactInfo';
+import { initMyHomePlugin } from './my/myHomePlugin';
+import { initMyHomePluginInstance } from './my/myHomePluginInstance';
 import { initCasbinRule } from './sys/casbinRule';
 import { initSysDomain } from './sys/sysDomain';
 import { initSysMenu } from './sys/sysMenu';
@@ -19,7 +19,7 @@ const run = async () => {
   await initSysRoleMenu();
   await initCasbinRule();
 
-  await initMyHomeContactInfo();
+  await initMyContactInfo();
   await initMyHomePlugin();
   await initMyHomePluginInstance();
 };
